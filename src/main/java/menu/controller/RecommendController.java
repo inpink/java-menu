@@ -3,6 +3,7 @@ package menu.controller;
 import static menu.messages.ErrorMessages.INVALID_COACH_NAME;
 import static menu.messages.ErrorMessages.INVALID_MENU_ITEME;
 
+import java.util.Set;
 import menu.domain.dto.CoachRestrctionsDto;
 import menu.domain.dto.CoachesNamesDto;
 import menu.util.InputUtil;
@@ -32,6 +33,8 @@ public class RecommendController {
                 this::inputCoachesnames,
                 e -> outputView.printErrorMessage(INVALID_COACH_NAME.getMessage())
         );
+
+        final Set<String> coachesNames = coachesNamesDto.getCoachesNames();
 
         final CoachRestrctionsDto coachRestrctionsDto = InputUtil.retryOnInvalidInput(
                 this::inputCoachRestrctions,
