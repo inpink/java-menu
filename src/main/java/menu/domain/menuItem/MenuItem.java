@@ -4,8 +4,7 @@ public interface MenuItem {
 
     String getName();
 
-    default boolean hasItem(String name) {
+    default boolean isSameName(String name) {
         return getName().equalsIgnoreCase(name);
     }
-
 }
