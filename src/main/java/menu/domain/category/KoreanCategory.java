@@ -1,6 +1,6 @@
-package menu.domain.menuItem;
+package menu.domain.category;
 
-public enum KoreanCategory implements MenuItem {
+public enum KoreanCategory implements CategoryItem {
 
     KIMBAP("김밥"),
     KIMCHI_STEW("김치찌개"),

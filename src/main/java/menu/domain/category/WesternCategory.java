@@ -1,6 +1,6 @@
-package menu.domain.menuItem;
+package menu.domain.category;
 
-public enum WesternCategory implements MenuItem {
+public enum WesternCategory implements CategoryItem {
 
     LASAGNA("라자냐"),
     GRATIN("그라탱"),

@@ -1,6 +1,6 @@
-package menu.domain.menuItem;
+package menu.domain.category;
 
-public enum ChineseCategory implements MenuItem {
+public enum ChineseCategory implements CategoryItem {
 
     KANPOONGI("깐풍기"),
     FRIED_NOODLES("볶음면"),

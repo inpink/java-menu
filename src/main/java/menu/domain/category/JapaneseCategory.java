@@ -1,6 +1,6 @@
-package menu.domain.menuItem;
+package menu.domain.category;
 
-public enum JapaneseCategory implements MenuItem {
+public enum JapaneseCategory implements CategoryItem {
 
     GYUDON("규동"),
     UDON("우동"),

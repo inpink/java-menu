@@ -14,4 +14,8 @@ public class CoachMapper {
 
         return new CoachRestrctionsDto(coachesNames);
     }
+
+    public static CoachNameDto of(final String coachName) {
+        return new CoachNameDto(coachName);
+    }
 }

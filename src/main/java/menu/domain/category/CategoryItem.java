@@ -1,6 +1,6 @@
-package menu.domain.menuItem;
+package menu.domain.category;
 
-public interface MenuItem {
+public interface CategoryItem {
 
     String getName();
 

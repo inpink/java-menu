@@ -1,6 +1,6 @@
-package menu.domain.menuItem;
+package menu.domain.category;
 
-public enum AsianCategory implements MenuItem {
+public enum AsianCategory implements CategoryItem {
 
     PAD_THAI("팟타이"),
     KHAO_PAD("카오 팟"),
