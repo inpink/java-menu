@@ -24,4 +24,12 @@ public class ConsoleInputView implements InputView {
         return CoachesMapper.convertToNames(input, SEPERATE_STANDARD.getMessage());
     }
 
+    @Override
+    public CoachRestrctionsDto inputCoachMenuRestrictions(final CoachNameDto coachNameDto) {
+        System.out.println(coachNameDto.getCoachName() + INPUT_COACH_MENU_RESTRICTIONS.getMessage());
+        final String input = InputUtil.input();
+        OutputUtil.printEmptyLine();
+
+        return CoachMapper.convertToRestrictions(input, SEPERATE_STANDARD.getMessage());
+    }
 }
