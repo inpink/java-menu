@@ -3,6 +3,7 @@ package menu.domain.menuItem;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import menu.util.ExceptionUtil;
 
 public enum Menu {
 
@@ -21,12 +22,20 @@ public enum Menu {
                 .collect(Collectors.toList()); //TODO: JDK 17에서는 .toList() 가능
     }
 
+    public static MenuItem findItem(String coachRestriction) {
+        return Arrays.stream(Menu.values())
+                .flatMap(menu -> menu.items.stream())
+                .filter(item -> item.isSameName(coachRestriction))
+                .findFirst()
+                .orElseThrow(() -> ExceptionUtil.returnInvalidValueException());
+    }
 
-    public static boolean containsItem(final String itemName) {
+
+/*    public static boolean containsItem(final String itemName) {
         return Arrays.stream(Menu.values())
                 .flatMap(menu -> menu.items.stream())
                 .anyMatch(item -> item.isSameName(itemName));
-    }
+    }*/
 
 
 }
