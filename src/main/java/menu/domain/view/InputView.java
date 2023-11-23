@@ -1,8 +1,12 @@
 package menu.domain.view;
 
 import static menu.domain.messages.InputMessages.INPUT_COACHES_NAMES;
+import static menu.domain.messages.InputMessages.INPUT_RESTRICTIONS;
 import static menu.domain.messages.InputMessages.START;
 
+import menu.domain.dto.CoachMapper;
+import menu.domain.dto.CoachNameDto;
+import menu.domain.dto.CoachRestrictionsDto;
 import menu.domain.dto.CoachesMapper;
 import menu.domain.dto.CoachesNamesDto;
 import menu.domain.util.InputUtil;
@@ -21,5 +25,15 @@ public class InputView {
         OutputUtil.printEmptyLine();
 
         return CoachesMapper.convertToNames(input);
+    }
+
+    public CoachRestrictionsDto inputCoachRestrictions(CoachNameDto coachNameDto) {
+        String coachName = coachNameDto.getName();
+        System.out.println(coachName + INPUT_RESTRICTIONS.getMessage());
+        String input = InputUtil.input();
+
+        OutputUtil.printEmptyLine();
+
+        return CoachMapper.convertToRestrictions(input);
     }
 }
