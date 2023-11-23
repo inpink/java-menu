@@ -18,10 +18,14 @@ public class Categories {
     }
 
     public static Categories createRandomCategories(List<RecommendDay> days) {
-        Map<RecommendDay, Category> categoryMap = days.stream()
-                .collect(Collectors.toMap(
-                        day -> day,
-                        day -> Category.pickRandomCategory()));
+        List<Category> availableCategories = decideCategories();
+        Map<RecommendDay, Category> categoryMap = new HashMap<>();
+
+        for (int i = 0; i < days.size(); i++) {
+            RecommendDay day = days.get(i);
+            Category category = availableCategories.get(i);
+            categoryMap.put(day, category);
+        }
 
         return new Categories(categoryMap);
     }
@@ -44,5 +48,9 @@ public class Categories {
 
     public List<RecommendDay> getDays() {
         return new ArrayList<>(categories.keySet());
+    }
+
+    public Category getCategory(RecommendDay recommendDay) {
+        return categories.get(recommendDay);
     }
 }

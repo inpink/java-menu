@@ -4,6 +4,7 @@ import static menu.constants.IntegerConstants.MAX_NAME_LEN;
 import static menu.constants.IntegerConstants.MIN_NAME_LEN;
 
 import java.util.stream.Stream;
+import menu.domain.dto.CoachRestrictionsDto;
 import menu.domain.entity.category.Category;
 import menu.domain.entity.category.CategoryItem;
 import menu.domain.util.ExceptionUtil;
@@ -55,6 +56,11 @@ public class Coach {
         }
     }
 
+    public void addRestrictions(CoachRestrictionsDto coachRestrictionsDto) {
+        coachRestrictionsDto.getRestrictions().stream()
+                .forEach(itemName -> restrictions.add(itemName));
+    }
+
     public String getName() {
         return name;
     }
@@ -66,4 +72,6 @@ public class Coach {
     public RecommendItems getRecommendItems() {
         return recommendItems;
     }
+
+
 }

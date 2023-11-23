@@ -1,7 +1,16 @@
 package menu;
 
+import menu.domain.controller.RecommendController;
+import menu.domain.view.InputView;
+import menu.domain.view.OutputView;
+
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        RecommendController recommendController = new RecommendController(
+                new InputView(),
+                new OutputView()
+        );
+
+        recommendController.play();
     }
 }
