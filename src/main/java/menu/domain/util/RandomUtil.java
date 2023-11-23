@@ -1,6 +1,7 @@
 package menu.domain.util;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import java.util.List;
 
 public class RandomUtil {
 
@@ -8,5 +9,8 @@ public class RandomUtil {
         return Randoms.pickNumberInRange(min, max);
     }
 
+    public static String pickRandom(List<String> input) {
+        return Randoms.shuffle(input).get(0);
+    }
 
 }

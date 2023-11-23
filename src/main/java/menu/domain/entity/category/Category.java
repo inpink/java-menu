@@ -46,6 +46,12 @@ public enum Category {
                 .orElseThrow(() -> ExceptionUtil.returnInvalidValueException());
     }
 
+    public CategoryItem pickRandomItem() {
+        String menu = RandomUtil.pickRandom(getAllDishesAsString());
+        return findDishStream(menu)
+                .orElseThrow(() -> ExceptionUtil.returnInvalidValueException("Dish not found"));
+    }
+
     private static IntStream getCategoryNumbersStream() {
         return Arrays.stream(Category.values())
                 .mapToInt(category -> category.number);
@@ -70,10 +76,13 @@ public enum Category {
                 .findFirst();
     }
 
-    public CategoryItem pickRandomItem() {
-        String menu = Randoms.shuffle(menus).get(0);
-
+    private List<String> getAllDishesAsString() {
+        return Arrays.stream(Category.values())
+                .flatMap(category -> category.getDishes().stream())
+                .map(CategoryItem::getName)
+                .collect(Collectors.toList());
     }
+
 
     public String getCategoryName() {
         return categoryName;
