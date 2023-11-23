@@ -37,4 +37,7 @@ public class Categories {
                 .collect(Collectors.toList());
     }
 
+    public Map<RecommendDay, Category> getCategories() {
+        return categories;
+    }
 }

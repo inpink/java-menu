@@ -50,4 +50,7 @@ public class Coaches {
         }
     }
 
+    public List<Coach> getCoaches() {
+        return coaches;
+    }
 }
