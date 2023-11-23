@@ -27,22 +27,29 @@ public class RecommendController {
     }
 
     public void play() {
-        CoachesNamesDto coachesNamesDto = inputValidCoachesNames();
-        Coaches coaches = createCoaches(coachesNamesDto);
+        inputView.startMessage();
         Categories categories = createCategories();
 
-        assignRecommendItemsToCoaches(coaches, categories);
+        CoachesNamesDto coachesNamesDto = inputValidCoachesNames();
+
+        Coaches coaches = inputValidRecommend(coachesNamesDto, categories);
+
         Recommend recommend = new Recommend(categories, coaches);
+        recommend.getCoaches().getCoaches().stream().forEach(
+                a -> System.out.println(a.getRecommendItems().getItems().get(1)));
+
         outputRecommendResult(recommend);
     }
 
-    private CoachesNamesDto inputValidCoachesNames() {
-        return InputUtil.retryOnInvalidInput(inputView::inputCoachesNames,
-                this::handleInputError);
+    private Coaches inputValidRecommend(CoachesNamesDto coachesNamesDto, Categories categories) {
+        return InputUtil.retryOnInvalidInput(()
+                        -> assignRecommendItemsToCoaches(coachesNamesDto, categories),
+                errorMessage -> outputView.displayError("[ERROR] 1"));
     }
 
-    private void handleInputError(String errorMessage) {
-        outputView.displayError(errorMessage);
+    private CoachesNamesDto inputValidCoachesNames() {
+        return InputUtil.retryOnInvalidInput(this::inputCoachesNames,
+                errorMessage -> outputView.displayError("[ERROR] 2"));
     }
 
     private CoachesNamesDto inputCoachesNames() {
@@ -57,24 +64,22 @@ public class RecommendController {
         return Categories.createRandomCategories(List.of(RecommendDay.values()));
     }
 
-    private void assignRecommendItemsToCoaches(Coaches coaches, Categories categories) {
+    private Coaches assignRecommendItemsToCoaches(CoachesNamesDto coachesNamesDto,
+                                                  Categories categories) {
+        Coaches coaches = createCoaches(coachesNamesDto);
+
         for (Coach coach : coaches.getCoaches()) {
             CoachNameDto coachNameDto = CoachMapper.ofName(coach);
             CoachRestrictionsDto coachRestrictionsDto = inputView.inputCoachRestrictions(coachNameDto);
-            addRecommendItems(coach, categories);
             coach.addRestrictions(coachRestrictionsDto);
         }
-    }
-
-    private void addRecommendItems(Coach coach, Categories categories) {
-        List<RecommendDay> days = List.of(RecommendDay.values());
-        for (RecommendDay day : days) {
-            coach.addRecommendItem(day, categories.getCategory(day));
-        }
+        return coaches;
     }
 
     private void outputRecommendResult(Recommend recommend) {
         RecommendDto recommendDto = RecommendMapper.ofResult(recommend);
         outputView.outputRecommendResult(recommendDto);
     }
+
+
 }

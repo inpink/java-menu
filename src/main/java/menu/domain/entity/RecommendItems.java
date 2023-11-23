@@ -1,9 +1,11 @@
 package menu.domain.entity;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import menu.domain.entity.category.CategoryItem;
 
 public class RecommendItems {
@@ -12,6 +14,7 @@ public class RecommendItems {
     private RecommendItems() {
         this.items= new HashMap<>();
     }
+
     private RecommendItems(Map<RecommendDay, CategoryItem> items) {
         this.items = items;
     }
@@ -30,5 +33,13 @@ public class RecommendItems {
 
     public List<CategoryItem> getItems() {
         return new ArrayList<>(items.values());
+    }
+
+    public List<String> getSortedItems() {
+        return items.entrySet().stream()
+                .sorted(Comparator.comparingInt(entry -> entry.getKey().getIndex()))
+                .map(Map.Entry::getValue)
+                .map(CategoryItem::getName)
+                .collect(Collectors.toList());
     }
 }

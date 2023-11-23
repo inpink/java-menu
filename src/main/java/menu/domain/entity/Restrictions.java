@@ -32,4 +32,5 @@ public class Restrictions {
     public boolean containsItem(CategoryItem item) {
         return restrictions.contains(item);
     }
+
 }

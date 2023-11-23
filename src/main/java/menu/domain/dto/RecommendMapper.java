@@ -1,5 +1,7 @@
 package menu.domain.dto;
 
+import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -17,7 +19,8 @@ public class RecommendMapper {
     public static RecommendDto ofResult(Recommend recommend) {
         List<String> sorts = recommend.getSorts()
                 .stream()
-                .map(RecommendDay::toString)
+                .sorted(Comparator.comparingInt(Enum::ordinal))
+                .map(RecommendDay::getKoreanName)
                 .collect(Collectors.toList());
         List<String> categories = extractCategoryNames(recommend.getCategories());
         Map<String, List<String>> coachesItems = extractCoachesItems(recommend.getCoaches());
@@ -26,7 +29,7 @@ public class RecommendMapper {
     }
 
     private static List<String> extractCategoryNames(Categories categories) {
-        return categories.getCategories().values()
+        return categories.getSortedCategories()
                 .stream()
                 .map(Category::getName)
                 .collect(Collectors.toList());
@@ -36,9 +39,11 @@ public class RecommendMapper {
         return coaches.getCoaches().stream()
                 .collect(Collectors.toMap(
                         Coach::getName,
-                        coach -> coach.getRecommendItems().getItems().stream()
-                                .map(CategoryItem::getName)
-                                .collect(Collectors.toList())
+                        coach -> coach.getRecommendItems().getSortedItems(),
+                        (oldValue, newValue) -> oldValue,
+                        LinkedHashMap::new
                 ));
     }
+
+
 }

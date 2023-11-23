@@ -17,6 +17,7 @@ public final class InputUtil {
                 return inputSupplier.get();
             } catch (IllegalArgumentException e) {
                 errorHandler.accept(e.getMessage());
+
             }
         }
     }

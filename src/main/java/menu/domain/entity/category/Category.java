@@ -1,12 +1,10 @@
 package menu.domain.entity.category;
 
-import camp.nextstep.edu.missionutils.Randoms;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 import menu.domain.util.ExceptionUtil;
 import menu.domain.util.RandomUtil;
 
@@ -47,9 +45,14 @@ public enum Category {
     }
 
     public CategoryItem pickRandomItem() {
-        String menu = RandomUtil.pickRandom(getAllDishesAsString());
-        return findDishStream(menu)
-                .orElseThrow(() -> ExceptionUtil.returnInvalidValueException("Dish not found"));
+        String menu = RandomUtil.pickRandom(this.dishes.stream()
+                .map(CategoryItem::getName)
+                .collect(Collectors.toList()));
+        System.out.println(menu+ " " + this.categoryName + this.dishes);
+        return this.dishes.stream()
+                .filter(dish -> dish.getName().equals(menu))
+                .findFirst()
+                .orElseThrow(() -> ExceptionUtil.returnInvalidValueException());
     }
 
     private static IntStream getCategoryNumbersStream() {

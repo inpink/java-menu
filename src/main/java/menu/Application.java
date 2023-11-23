@@ -1,6 +1,7 @@
 package menu;
 
 import menu.domain.controller.RecommendController;
+import menu.domain.entity.category.Category;
 import menu.domain.view.InputView;
 import menu.domain.view.OutputView;
 

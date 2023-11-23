@@ -15,14 +15,11 @@ import menu.domain.util.OutputUtil;
 public class InputView {
     public void startMessage() {
         System.out.println(START.getMessage());
-        OutputUtil.printEmptyLine();
     }
 
     public CoachesNamesDto inputCoachesNames() {
         System.out.println(INPUT_COACHES_NAMES.getMessage());
         String input = InputUtil.input();
-
-        OutputUtil.printEmptyLine();
 
         return CoachesMapper.convertToNames(input);
     }
@@ -32,7 +29,6 @@ public class InputView {
         System.out.println(coachName + INPUT_RESTRICTIONS.getMessage());
         String input = InputUtil.input();
 
-        OutputUtil.printEmptyLine();
 
         return CoachMapper.convertToRestrictions(input);
     }
