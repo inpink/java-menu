@@ -26,8 +26,6 @@ public class Coaches {
         return new Coaches(coaches);
     }
 
-
-
     private void validate(List<Coach> coaches) {
         validateDuplicate(coaches);
         validateCoachesCount(coaches);

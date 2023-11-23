@@ -1,6 +1,8 @@
 package menu.domain.entity;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import menu.domain.entity.category.CategoryItem;
 
@@ -26,5 +28,7 @@ public class RecommendItems {
         items.put(recommendDay,randomItem);
     }
 
-
+    public List<CategoryItem> getItems() {
+        return new ArrayList<>(items.values());
+    }
 }

@@ -2,6 +2,7 @@ package menu.domain.entity;
 
 import static menu.constants.IntegerConstants.MAX_DUPLICATE_CATEGORY_COUNT;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,5 +40,9 @@ public class Categories {
 
     public Map<RecommendDay, Category> getCategories() {
         return categories;
+    }
+
+    public List<RecommendDay> getDays() {
+        return new ArrayList<>(categories.keySet());
     }
 }

@@ -1,5 +1,6 @@
 package menu.domain.entity;
 
+import java.util.List;
 import menu.domain.entity.category.Category;
 
 public class Recommend {
@@ -28,5 +29,17 @@ public class Recommend {
                                              RecommendDay recommendDay,
                                              Category category) {
         coach.addRecommendItem(recommendDay, category);
+    }
+
+    public Categories getCategories() {
+        return categories;
+    }
+
+    public Coaches getCoaches() {
+        return coaches;
+    }
+
+    public List<RecommendDay> getSorts() {
+        return categories.getDays();
     }
 }

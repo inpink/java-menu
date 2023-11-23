@@ -5,6 +5,7 @@ import static menu.domain.messages.InputMessages.INPUT_SEPARATOR;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
+import menu.domain.entity.Coach;
 import menu.domain.util.StringUtil;
 
 public class CoachMapper {
@@ -19,7 +20,8 @@ public class CoachMapper {
         return new CoachRestrictionsDto(restrictions);
     }
 
-    public static CoachNameDto ofName(String name) {
+    public static CoachNameDto ofName(Coach coach) {
+        String name = coach.getName();
         return new CoachNameDto(name);
     }
 }

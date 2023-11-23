@@ -84,7 +84,7 @@ public enum Category {
     }
 
 
-    public String getCategoryName() {
+    public String getName() {
         return categoryName;
     }
 
