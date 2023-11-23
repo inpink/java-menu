@@ -28,4 +28,8 @@ public class Restrictions {
         CategoryItem item = Category.findItem(itemName);
         restrictions.add(item);
     }
+
+    public boolean containsItem(CategoryItem item) {
+        return restrictions.contains(item);
+    }
 }

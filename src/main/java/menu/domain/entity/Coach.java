@@ -3,6 +3,9 @@ package menu.domain.entity;
 import static menu.constants.IntegerConstants.MAX_NAME_LEN;
 import static menu.constants.IntegerConstants.MIN_NAME_LEN;
 
+import java.util.stream.Stream;
+import menu.domain.entity.category.Category;
+import menu.domain.entity.category.CategoryItem;
 import menu.domain.util.ExceptionUtil;
 
 public class Coach {
@@ -22,6 +25,23 @@ public class Coach {
         return new Coach(name,
                 Restrictions.createEmpty(),
                 RecommendItems.createEmpty());
+    }
+
+    public void addRecommendItem(RecommendDay recommendDay, Category category) {
+
+        CategoryItem item = category.pickRandomItem();
+        boolean isValid = isValidItem(item);
+
+        while (!isValid) {
+            item = category.pickRandomItem();
+            isValid = isValidItem(item);
+        }
+
+        recommendItems.addItem(recommendDay, item);
+    }
+
+    private boolean isValidItem(CategoryItem item) {
+        return !restrictions.containsItem(item) && !recommendItems.containsItem(item);
     }
 
     private void validateName(String name) {
