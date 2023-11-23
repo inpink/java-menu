@@ -1,5 +1,8 @@
 package menu.domain.entity;
 
+import static menu.constants.IntegerConstants.MAX_COACHES_COUNT;
+import static menu.constants.IntegerConstants.MIN_COACHES_COUNT;
+
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -39,7 +42,8 @@ public class Coaches {
     }
 
     private void validateCoachesCount(List<Coach> coaches) {
-        if (coaches.size() < 2 || coaches.size() > 5) {
+        if (coaches.size() < MIN_COACHES_COUNT.getValue()
+                || coaches.size() > MAX_COACHES_COUNT.getValue()) {
             ExceptionUtil.throwInvalidValueException();
         }
     }
