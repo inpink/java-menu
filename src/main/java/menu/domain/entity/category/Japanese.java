@@ -21,4 +21,9 @@ public enum Japanese implements CategoryItem {
         return koreanName;
     }
 
+    @Override
+    public String getName() {
+        return koreanName;
+    }
+
 }

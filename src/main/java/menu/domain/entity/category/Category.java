@@ -2,7 +2,10 @@ package menu.domain.entity.category;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import menu.domain.util.ExceptionUtil;
 
 public enum Category {
     JAPANESE("일식", Japanese.values()),
@@ -18,6 +21,22 @@ public enum Category {
         this.categoryName = categoryName;
         this.dishes = Arrays.stream(dishes)
                 .collect(Collectors.toList());
+    }
+
+    public static boolean hasItem(String itemName) {
+        return findDishStream(itemName).isPresent();
+    }
+
+    public static CategoryItem findItem(String itemName) {
+        return findDishStream(itemName)
+                .orElseThrow(() -> ExceptionUtil.returnInvalidValueException());
+    }
+
+    private static Optional<CategoryItem> findDishStream(String itemName) {
+        return Arrays.stream(Category.values())
+                .flatMap(category -> category.getDishes().stream())
+                .filter(dish -> dish.getName().equalsIgnoreCase(itemName))
+                .findFirst();
     }
 
     public String getCategoryName() {

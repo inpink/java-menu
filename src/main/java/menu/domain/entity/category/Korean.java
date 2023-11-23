@@ -20,4 +20,9 @@ public enum Korean implements CategoryItem {
     public String getKoreanName() {
         return koreanName;
     }
+
+    @Override
+    public String getName() {
+        return koreanName;
+    }
 }

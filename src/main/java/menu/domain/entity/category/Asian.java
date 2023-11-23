@@ -1,6 +1,6 @@
 package menu.domain.entity.category;
 
-public enum Asian  implements CategoryItem{
+public enum Asian implements CategoryItem {
     PAD_THAI("팟타이"),
     KHAO_PAD("카오 팟"),
     NASI_GORENG("나시고렝"),
@@ -18,6 +18,11 @@ public enum Asian  implements CategoryItem{
     }
 
     public String getKoreanName() {
+        return koreanName;
+    }
+
+    @Override
+    public String getName() {
         return koreanName;
     }
 }

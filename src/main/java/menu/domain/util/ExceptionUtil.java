@@ -7,6 +7,11 @@ public final class ExceptionUtil {
         throw new IllegalArgumentException();
     }
 
+    public static IllegalArgumentException returnInvalidValueException() {
+
+        return new IllegalArgumentException();
+    }
+
     public static IllegalArgumentException returnInvalidValueException(
             final String message) {
 
