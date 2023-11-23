@@ -29,6 +29,8 @@ public class Coach {
     }
 
     public void addRecommendItem(RecommendDay recommendDay, Category category) {
+        System.out.println("recommendDay = " + recommendDay);
+        System.out.println("category = " + category);
         CategoryItem item = category.pickRandomItem();
         boolean isValid = isValidItem(item);
 

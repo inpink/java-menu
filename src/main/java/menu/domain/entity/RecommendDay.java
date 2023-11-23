@@ -23,4 +23,5 @@ public enum RecommendDay {
         return koreanName;
     }
 
+
 }

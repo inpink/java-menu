@@ -48,7 +48,9 @@ public enum Category {
         String menu = RandomUtil.pickRandom(this.dishes.stream()
                 .map(CategoryItem::getName)
                 .collect(Collectors.toList()));
+
         System.out.println(menu+ " " + this.categoryName + this.dishes);
+
         return this.dishes.stream()
                 .filter(dish -> dish.getName().equals(menu))
                 .findFirst()

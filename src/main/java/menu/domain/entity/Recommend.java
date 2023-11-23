@@ -14,16 +14,18 @@ public class Recommend {
     }
 
     private void assignRecommendations() {
-        categories.getCategories()
-                .forEach(this::assignRecommendationForDay);
+
+        for (RecommendDay recommendDay : RecommendDay.values()) {
+            Category category = categories.getCategory(recommendDay);
+            assignRecommendationForDay(recommendDay, category);
+        }
     }
 
-    private void assignRecommendationForDay(RecommendDay recommendDay,
-                                            Category category) {
+    private void assignRecommendationForDay(RecommendDay recommendDay, Category category) {
         coaches.getCoaches()
-                .forEach(coach
-                        -> assignRecommendationToCoach(coach, recommendDay, category));
+                .forEach(coach -> assignRecommendationToCoach(coach, recommendDay, category));
     }
+
 
     private void assignRecommendationToCoach(Coach coach,
                                              RecommendDay recommendDay,
