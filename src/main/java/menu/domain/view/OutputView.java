@@ -56,4 +56,7 @@ public class OutputView {
         return "[ " + label + " | " + formattedItems + " ]";
     }
 
+    public void displayError(String errorMessage) {
+        System.out.println(errorMessage);
+    }
 }

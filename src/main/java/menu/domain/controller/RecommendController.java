@@ -12,6 +12,7 @@ import menu.domain.entity.Coach;
 import menu.domain.entity.Coaches;
 import menu.domain.entity.Recommend;
 import menu.domain.entity.RecommendDay;
+import menu.domain.util.InputUtil;
 import menu.domain.view.InputView;
 import menu.domain.view.OutputView;
 
@@ -26,13 +27,22 @@ public class RecommendController {
     }
 
     public void play() {
-        CoachesNamesDto coachesNamesDto = inputCoachesNames();
+        CoachesNamesDto coachesNamesDto = inputValidCoachesNames();
         Coaches coaches = createCoaches(coachesNamesDto);
         Categories categories = createCategories();
 
         assignRecommendItemsToCoaches(coaches, categories);
         Recommend recommend = new Recommend(categories, coaches);
         outputRecommendResult(recommend);
+    }
+
+    private CoachesNamesDto inputValidCoachesNames() {
+        return InputUtil.retryOnInvalidInput(inputView::inputCoachesNames,
+                this::handleInputError);
+    }
+
+    private void handleInputError(String errorMessage) {
+        outputView.displayError(errorMessage);
     }
 
     private CoachesNamesDto inputCoachesNames() {
